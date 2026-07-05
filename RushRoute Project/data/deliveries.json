@@ -1,0 +1,14 @@
+[
+  {
+    "distance_km": 18,
+    "active_orders": 4,
+    "weather": "clear",
+    "pickup_hour": 10
+  },
+  {
+    "distance_km": -5,
+    "active_orders": 2,
+    "weather": "",
+    "pickup_hour": 25
+  }
+]
