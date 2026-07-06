@@ -53,29 +53,40 @@ or we can also adjust the scoring logic to allow for a higher maximum score.
 the HIGH threshold is set above 10, making HIGH unreachable.
 '''
 
+from config import HIGH_THRESHOLD
+from config import MEDIUM_THRESHOLD
+
+from rules import (
+    DistanceRule,
+    ActiveOrdersRule,
+    WeatherRule,
+    RushHourRule,
+    HeavyOrderRule
+)
+
+
+RULES = [
+    DistanceRule(),
+    ActiveOrdersRule(),
+    WeatherRule(),
+    RushHourRule(),
+    HeavyOrderRule()
+]
 
 
 # Refactored code with adjusted thresholds for risk labels
 
-def late_risk_label(distance_km, active_orders, weather, pickup_hour):
+def late_risk_label(delivery):
+
     score = 0
-    HIGH_THRESHOLD = 6
-    MEDIUM_THRESHOLD = 3
 
-    if distance_km > 20:
-        score += 2
-
-    if active_orders > 5:
-        score += 2
-
-    if weather.lower() == "storm":
-        score += 3
-
-    if pickup_hour in (7, 8, 9, 17, 18, 19, 20):
-        score += 1
+    for rule in RULES:
+        score += rule.calculate(delivery)
 
     if score >= HIGH_THRESHOLD:
         return "HIGH"
+
     elif score >= MEDIUM_THRESHOLD:
         return "MEDIUM"
+
     return "LOW"
