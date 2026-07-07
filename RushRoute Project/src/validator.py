@@ -7,7 +7,7 @@ def validate_delivery(record):
 
     required_fields = [
         "distance_km",
-        "active_orders",
+        "driver_active_orders",
         "weather",
         "pickup_hour"
     ]

@@ -33,7 +33,7 @@ class ActiveOrdersRule(RiskRule):
     """Adds risk points when many active orders are assigned."""
 
     def calculate(self, delivery):
-        if delivery["active_orders"] > ACTIVE_ORDER_LIMIT:
+        if delivery["driver_active_orders"] > ACTIVE_ORDER_LIMIT:
             points=2
             return points
         return 0
